@@ -1,63 +1,109 @@
-This project provides a robust implementation of Voice Activity Detection (VAD) and Speech-to-Text using an **ESP32** and the **Gemini 2.5 Flash API**. 
+# 🇸🇦 Saudi AI Robot
 
-Unlike many simple examples, this code handles I2S microphone sampling, local audio playback for verification, and optimized JSON transmission to the cloud to avoid RAM overflows on the ESP32.
+An interactive AI-powered robot designed for Saudi National Day celebrations.
 
-## 🚀 Features
-* **Voice Activity Detection (VAD):** Automatically starts recording when you speak and stops after a period of silence.
-* **High-Fidelity Sampling:** Uses 16kHz sample rate, ideal for Gemini's audio processing.
-* **PSRAM Optimized:** Uses external RAM to store up to 5 seconds of audio.
-* **Local Feedback:** Plays your audio back through a speaker before sending it to the cloud (optional debugging step).
+## 🤖 About the Project
 
-## 🛠️ Hardware Requirements
-* **Microcontroller:** ESP32-S3 (or any ESP32 with PSRAM).
-* **Microphone:** INMP441 (I2S Digital Mic).
-* **Speaker:** MAX98357A I2S Amplifier + 4/8 Ohm Speaker.
+Saudi AI Robot is an interactive mobile robot that combines robotics,
+voice interaction, and artificial intelligence to create an engaging
+experience for visitors during Saudi National Day celebrations.
 
+The robot is designed to detect people in its surroundings. When a
+person approaches, the robot stops and initiates a voice interaction,
+allowing the visitor to communicate with the robot naturally.
 
+The robot uses an ESP32-S3 for voice processing and AI interaction,
+while an Arduino-based controller manages the robot's movement and
+sensors.
 
-## 📋 Pin Mapping
-<img width="2316" height="1255" alt="image" src="https://github.com/user-attachments/assets/d9228a7f-67a5-48dd-974b-cce985b8fd6f" />
+## ✨ Features
 
+- 🚗 Mobile robotic platform
+- 👤 Person detection
+- 🎙️ Voice interaction
+- 🧠 Gemini AI integration
+- 🔊 Voice responses
+- 🖥️ Interactive display
+- 🇸🇦 Saudi National Day themed interactions
+- 🤖 Autonomous robot movement
 
-| Component | Pin (ESP32) |
-| :--- | :--- |
-| **Mic SCK** | GPIO 12 |
-| **Mic WS**  | GPIO 13 |
-| **Mic SD**  | GPIO 11 |
-| **Mic L/R** | GND     |
-| **Mic GND** | GND     |
-| **Mic VDD** | 3.3V    |
-| **Speaker BCLK** | GPIO 6 |
-| **Speaker LRC**  | GPIO 5 |
-| **Speaker DIN**  | GPIO 7 |
-| **Speaker GAIN** | 3.3V   |
-| **Speaker SD**   | ---    |
-| **Speaker GND**  | GND    |
-| **Speaker VIN**  | 3.3V   |
+## 🏗️ System Architecture
 
+The system consists of two main controllers:
 
-## ⚙️ Setup Instructions
+### Arduino UNO R3
 
-1.  **API Key:** Get your Google AI Studio API Key from [aistudio.google.com](https://aistudio.google.com/).
-2.  **Libraries:** Install the following in your Arduino IDE:
-    * `ArduinoJson`
-    * `WiFi` & `HTTPClient`
-3.  **Configuration:** Update the `ssid`, `password`, and `apiKey` variables in the code.
-4.  **Partition Scheme:** Ensure you select a "Huge APP" or "Large SPIFFS" partition scheme with **PSRAM Enabled** in the Tools menu.
+Responsible for:
 
-## 🧠 How it Works
-1.  **Listening:** The ESP32 constantly monitors the I2S microphone.
-2.  **Triggering:** When the volume exceeds `VOICE_THRESHOLD`, it begins filling the `audioBuffer`.
-3.  **Packaging:** Once silence is detected, it wraps the raw PCM data into a **WAV header** and encodes it to **Base64**.
-4.  **Inference:** The data is sent to Gemini with a system prompt to "Transcribe exactly what is said."
-5.  <img width="658" height="275" alt="image" src="https://github.com/user-attachments/assets/10bd4ba8-c133-46ed-8baa-d4198a9dd2eb" />
+- Motor control
+- Robot movement
+- Ultrasonic sensing
+- Basic navigation and robotic control
 
+### ESP32-S3
 
-##💰 Cost Note: 
-This project uses the Gemini 2.5 Flash Free Tier, which allows for up to 250 requests per day at no cost. It's perfect for hobbyists and students building their first AI companion
+Responsible for:
 
-## 🤝 Contributing
-This is a module from my upcoming **AI Companion Robot** project. If you find bugs or ways to optimize the I2S buffer, feel free to open a Pull Request!
+- Microphone input
+- Voice Activity Detection (VAD)
+- Speech-to-Text (STT)
+- Gemini AI communication
+- Audio response
+
+The two controllers communicate with each other to coordinate
+robotic movement and AI interaction.
+
+## 🛠️ Hardware
+
+- Arduino UNO R3
+- ESP32-S3
+- Robot car chassis
+- DC motors
+- Motor driver
+- Ultrasonic sensor
+- INMP441 I2S microphone
+- MAX98357A amplifier
+- Speaker
+- Display
+- Servo motor
+- Battery / power supply
+
+## 🧠 AI Interaction
+
+The robot uses Google's Gemini API to enable voice-based interaction.
+
+The interaction process is:
+
+1. The robot detects a nearby person.
+2. The robot stops and initiates an interaction.
+3. The microphone captures the person's voice.
+4. Speech is processed and converted into text.
+5. The text is sent to Gemini.
+6. Gemini generates a response.
+7. The response is played through the robot's speaker.
+8. The robot continues the interaction.
+
+## 🎯 Project Goal
+
+The goal of this project is to demonstrate how artificial intelligence
+and robotics can be combined to create an interactive and engaging
+experience for Saudi National Day celebrations.
+
+The project also aims to showcase practical applications of voice AI,
+embedded systems, sensors, and mobile robotics.
+
+## 📚 Acknowledgment
+
+This project builds upon the open-source
+ESP32 Gemini STT implementation by Reaganhoo,
+licensed under the MIT License.
+
+The original implementation was modified and integrated into the
+Saudi AI Robot project.
 
 ## 📄 License
-This code is released under the MIT License.
+
+This project preserves the original MIT License from the underlying
+open-source implementation.
+
+See the `LICENSE` file for the complete license text.
